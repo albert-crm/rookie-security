@@ -6,9 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 /**
- * caplie.v.1.0.2
- *
- * @Classname QuickstartApplication
+ * @Classname RookieSecurityApplication
  * @Description http://localhost:18900/quickstart/hello/hello  输入用户名和密码：admin/admin
  * 也可以用postman的basic
  * @Author rookie
