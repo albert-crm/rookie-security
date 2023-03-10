@@ -45,9 +45,15 @@ public class UserPasswordAuthenticationProvider implements AuthenticationProvide
         };
     }
 
+//    @Override
+//    public boolean supports(Class<?> aClass) {
+//        return true;
+//    }
+
     @Override
-    public boolean supports(Class<?> aClass) {
-        return true;
+    public boolean supports(Class<?> authentication) {
+
+        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
     }
 
 }

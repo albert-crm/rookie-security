@@ -1,11 +1,16 @@
 package com.rookie.bigdata.config;
 
 
+import com.rookie.bigdata.filter.JWTAuthenticationFilter;
+import com.rookie.bigdata.filter.JWTAuthorizationFilter;
 import com.rookie.bigdata.provider.UserPasswordAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -44,16 +49,17 @@ public class SecurityConfig {
      */
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated();
-
-//        http.authenticationManager(new ProviderManager(myAuthenticationProvider));
-        // http.authenticationManager()
-        http.authenticationProvider(userPasswordAuthenticationProvider)
-                .formLogin()
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/auth/**").permitAll()
+                .anyRequest().hasAnyAuthority("ROLE_ADMIN")
                 .and()
-                .httpBasic();
-//        http.formLogin();
-//        http.httpBasic();
+                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                // 让校验 Token 的过滤器在身份认证过滤器之后
+                .addFilterAfter(new JWTAuthorizationFilter(), JWTAuthenticationFilter.class)
+                // 不需要 Session
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
         return http.build();
     }
 
@@ -63,40 +69,18 @@ public class SecurityConfig {
     }
 
 
-//    @Bean
-//    public UserDetailsService users() {
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password(passwordEncoder().encode("user"))
-//                .roles("USER")
-//                .build();
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password(passwordEncoder().encode("admin"))
-//                .roles("USER", "ADMIN")
-//                .build();
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
+    /**
+     * 身份管理器
+     *
+     * @return
+     */
+    @Bean
+    public AuthenticationManager authenticationManager() {
 
-//    @Bean
-//    public UserDetailsService users() {
-//        // The builder will ensure the passwords are encoded before saving in memory
-//        User.UserBuilder users = User.withDefaultPasswordEncoder();
-//        UserDetails user = users
-//                .username("user")
-//                //密码不能用passwod,否则校验不通过
-//                .password("user")
-//                .roles("USER")
-//                .build();
-//
-////        System.out.println(passwordEncoder().encode("password"));
-//        UserDetails admin = users
-//                .username("admin")
-//                .password("admin")
-//                .roles("USER", "ADMIN")
-//                .build();
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
+        return new ProviderManager(userPasswordAuthenticationProvider);
+
+    }
+
 
 
 }
