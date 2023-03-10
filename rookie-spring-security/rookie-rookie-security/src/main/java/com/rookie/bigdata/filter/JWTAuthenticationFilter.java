@@ -33,13 +33,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-        // 浏览器访问 http://localhost:18902/auth/login 会通过 JWTAuthenticationFilter
-        super.setFilterProcessesUrl("/auth/login");
-        super.setUsernameParameter("name");
     }
 
     /**
-     * 在AbstractAuthenticationProcessingFilter.requiresAuthentication匹配的时候只有 /auth/login请求uri才会匹配该过滤器
      * @param request
      * @param response
      * @return
@@ -56,6 +52,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         );
     }
 
+    /**
+     * 认证成功之后调用该方法
+     *
+     * @param request
+     * @param response
+     * @param chain
+     * @param authResult
+     */
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain,
@@ -70,6 +74,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     /**
      * 如果 attemptAuthentication 抛出 AuthenticationException 则会调用这个方法
+     *
      * @param request
      * @param response
      * @param failed

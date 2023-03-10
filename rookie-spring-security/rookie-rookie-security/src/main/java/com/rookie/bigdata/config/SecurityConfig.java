@@ -1,6 +1,7 @@
 package com.rookie.bigdata.config;
 
 
+import com.rookie.bigdata.filter.HttpServletRequestWrapFilter;
 import com.rookie.bigdata.filter.JWTAuthenticationFilter;
 import com.rookie.bigdata.filter.JWTAuthorizationFilter;
 import com.rookie.bigdata.provider.UserPasswordAuthenticationProvider;
@@ -20,6 +21,9 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
 
 
 /**
@@ -41,6 +45,8 @@ public class SecurityConfig {
     @Autowired
     private UserPasswordAuthenticationProvider userPasswordAuthenticationProvider;
 
+    @Autowired
+    private CsrfTokenRepository csrfTokenMemoryRepository;
 
     /**
      * @param http
@@ -49,18 +55,29 @@ public class SecurityConfig {
      */
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+
+        http
+                .csrf()
+                //忽略的请求uri
+                .ignoringAntMatchers("/login")
+                //火球token的对象
+                .csrfTokenRepository(csrfTokenMemoryRepository)
+                .and()
                 .authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
+//                .antMatchers("/auth/**").permitAll()
                 .anyRequest().hasAnyAuthority("ROLE_ADMIN")
                 .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-                // 让校验 Token 的过滤器在身份认证过滤器之后
+                .formLogin().disable()
+                //请求包装类过滤器在CsrfFilter之前，为了解决参数多次获取的问题
+                .addFilterBefore(new HttpServletRequestWrapFilter(), CsrfFilter.class)
+                //
+                .addFilterAt(new JWTAuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 .addFilterAfter(new JWTAuthorizationFilter(), JWTAuthenticationFilter.class)
-                // 不需要 Session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         return http.build();
+
+
     }
 
     @Bean
@@ -80,7 +97,6 @@ public class SecurityConfig {
         return new ProviderManager(userPasswordAuthenticationProvider);
 
     }
-
 
 
 }
