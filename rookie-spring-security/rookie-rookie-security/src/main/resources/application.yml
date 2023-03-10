@@ -8,11 +8,11 @@ spring:
 
     allow-bean-definition-overriding: true
     allow-circular-references: true
-#  datasource:
-#    url: jdbc:mysql://127.0.0.1/demo_spring_security?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-#    password: root
-#    username: root
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    url: jdbc:mysql://127.0.0.1/demo_security?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    password: root
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 server:
   servlet:

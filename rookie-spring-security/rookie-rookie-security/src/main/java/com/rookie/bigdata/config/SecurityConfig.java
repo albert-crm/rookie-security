@@ -1,6 +1,7 @@
 package com.rookie.bigdata.config;
 
 
+import com.rookie.bigdata.provider.UserPasswordAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +33,9 @@ public class SecurityConfig {
     @Autowired
     private AuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
+    @Autowired
+    private UserPasswordAuthenticationProvider userPasswordAuthenticationProvider;
+
 
     /**
      * @param http
@@ -41,8 +45,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests().anyRequest().authenticated();
-        http.formLogin().failureHandler(customAuthenticationFailureHandler).successHandler(customAuthenticationSuccessHandler);
-        http.httpBasic();
+
+//        http.authenticationManager(new ProviderManager(myAuthenticationProvider));
+        // http.authenticationManager()
+        http.authenticationProvider(userPasswordAuthenticationProvider)
+                .formLogin()
+                .and()
+                .httpBasic();
+//        http.formLogin();
+//        http.httpBasic();
         return http.build();
     }
 
@@ -52,20 +63,20 @@ public class SecurityConfig {
     }
 
 
-    @Bean
-    public UserDetailsService users() {
-        UserDetails user = User.builder()
-                .username("user")
-                .password(passwordEncoder().encode("user"))
-                .roles("USER")
-                .build();
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("USER", "ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
-    }
+//    @Bean
+//    public UserDetailsService users() {
+//        UserDetails user = User.builder()
+//                .username("user")
+//                .password(passwordEncoder().encode("user"))
+//                .roles("USER")
+//                .build();
+//        UserDetails admin = User.builder()
+//                .username("admin")
+//                .password(passwordEncoder().encode("admin"))
+//                .roles("USER", "ADMIN")
+//                .build();
+//        return new InMemoryUserDetailsManager(user, admin);
+//    }
 
 //    @Bean
 //    public UserDetailsService users() {

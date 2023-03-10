@@ -1,6 +1,7 @@
 package com.rookie.bigdata;
 
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -15,7 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Version 1.0
  */
 
-
+@MapperScan(basePackages = "com.rookie.bigdata.mapper")
 @SpringBootApplication
 public class RookieSecurityApplication {
 

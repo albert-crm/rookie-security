@@ -1,38 +1,75 @@
-/*
- Navicat Premium Data Transfer
+CREATE TABLE IF NOT EXISTS USER
+(
+    id       INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name     VARCHAR(10),
+    password VARCHAR(100)
+    )
+    CHARSET utf8;
 
- Source Server         : mysql
- Source Server Type    : MySQL
- Source Server Version : 50527
- Source Host           : localhost:3306
- Source Schema         : demo_spring_security
+CREATE TABLE IF NOT EXISTS ROLE
+(
+    id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(10)
+    )
+    CHARSET utf8;
 
- Target Server Type    : MySQL
- Target Server Version : 50527
- File Encoding         : 65001
+CREATE TABLE IF NOT EXISTS ROLE_USER
+(
+    user_id INT,
+    role_id INT
+)
+    CHARSET utf8;
 
- Date: 10/08/2021 16:07:49
-*/
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+INSERT INTO `ROLE` (`id`, `name`)
+SELECT '1',
+       'ROLE_ADMIN'
+FROM dual
+WHERE NOT exists(SELECT id
+                 FROM `ROLE`
+                 WHERE id = '1');
+INSERT INTO `ROLE` (`id`, `name`)
+SELECT '2',
+       'ROLE_USER'
+FROM dual
+WHERE NOT exists(SELECT id
+                 FROM `ROLE`
+                 WHERE id = '2');
+-- 密码是admin
+INSERT INTO `USER` (`id`, `password`, `name`)
+SELECT '1',
+       '$2a$10$0eA9i4hBVfPNiVz3u4Cg0uF0fEgjCK1EA7tenOXZ..I1W1HtYps.q',
+       'admin'
+FROM dual
+WHERE NOT exists(SELECT id
+                 FROM `USER`
+                 WHERE id = '1');
+INSERT INTO `USER` (`id`, `password`, `name`)
+-- 密码是user
+SELECT '2',
+       '$2a$10$8Oht.MIQTMVjjA.lf6hQL./pHHI0GnQC.BC9fBsvPWXaeathXQlry',
+       'user'
+FROM dual
+WHERE NOT exists(SELECT id
+                 FROM `USER`
+                 WHERE id = '2');
 
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
-                         `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-                         `name` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名字',
-                         `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
-                         `role` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色',
-                         PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
--- ----------------------------
--- Records of user password:user
--- ----------------------------
-INSERT INTO `user` VALUES (1, 'root', '$2a$10$a7H4/4wMnhWOrpOEeT8pkeJcDXyw8QROZ5HZzKWSnEtoGKNuKbu2y', 'ADMIN');
-INSERT INTO `user` VALUES (2, 'user', '$2a$10$a7H4/4wMnhWOrpOEeT8pkeJcDXyw8QROZ5HZzKWSnEtoGKNuKbu2y', 'USER');
+INSERT INTO `ROLE_USER` (`user_id`, `role_id`)
+SELECT '1',
+       '1'
+FROM dual
+WHERE NOT exists(SELECT user_id
+                 FROM `ROLE_USER`
+                 WHERE user_id = '1');
+INSERT INTO `ROLE_USER` (`user_id`, `role_id`)
+SELECT '2',
+       '2'
+FROM dual
+WHERE NOT exists(SELECT user_id
+                 FROM `ROLE_USER`
+                 WHERE user_id = '2');
 
-SET FOREIGN_KEY_CHECKS = 1;
+
+
+
