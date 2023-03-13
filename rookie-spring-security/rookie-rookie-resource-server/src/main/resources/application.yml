@@ -1,0 +1,15 @@
+logging:
+  level:
+    root: debug
+spring:
+  application:
+    name: resource-server
+  main:
+
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+
+server:
+  servlet:
+    context-path: /resource-server
+  port: 18911

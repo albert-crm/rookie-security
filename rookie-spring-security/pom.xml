@@ -12,7 +12,9 @@
     <artifactId>rookie-spring-security</artifactId>
     <packaging>pom</packaging>
     <modules>
-      <module>rookie-rookie-security</module>
+        <module>rookie-rookie-security</module>
+        <module>rookie-rookie-authorization-server</module>
+        <module>rookie-rookie-resource-server</module>
     </modules>
 
     <properties>
@@ -24,7 +26,6 @@
     </properties>
 
 
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -34,6 +35,15 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+
+            <!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>2.5.1.RELEASE</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>cn.hutool</groupId>
@@ -65,7 +75,7 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-impl</artifactId>
                 <version>0.11.1</version>
-              <!--  <scope>runtime</scope>-->
+                <!--  <scope>runtime</scope>-->
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
             <dependency>
