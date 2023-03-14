@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
       <module>rookie-rookie-security</module>
+        <module>rookie-felord-security</module>
     </modules>
 
     <properties>
