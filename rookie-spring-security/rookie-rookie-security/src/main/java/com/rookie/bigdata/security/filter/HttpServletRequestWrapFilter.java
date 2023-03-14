@@ -1,8 +1,11 @@
-package com.rookie.bigdata.filter;
+package com.rookie.bigdata.security.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.rookie.bigdata.controller.HelloController;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -30,12 +33,15 @@ import java.util.Map;
  * @Date 2023/3/8 9:40
  * @Version 1.0
  */
-@Slf4j
+
 public class HttpServletRequestWrapFilter extends OncePerRequestFilter {
+
+    public static final Logger logger = LoggerFactory.getLogger(HttpServletRequestWrapFilter.class);
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        log.info("request body servlet request wrap filter ...");
+        logger.info("request body servlet request wrap filter ...");
         final RequestBodyServletRequestWrapper requestWrapper = new RequestBodyServletRequestWrapper(request);
         filterChain.doFilter(requestWrapper, response);
     }
