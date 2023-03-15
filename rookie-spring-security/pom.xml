@@ -12,6 +12,9 @@
     <artifactId>rookie-spring-security</artifactId>
     <packaging>pom</packaging>
     <modules>
+        <module>rookie-rookie-security</module>
+        <module>rookie-rookie-authorization-server</module>
+        <module>rookie-rookie-resource-server</module>
       <module>rookie-rookie-security</module>
 
     </modules>
