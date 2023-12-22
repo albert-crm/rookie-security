@@ -9,6 +9,8 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>
+
+        <module>rookie-spring-jwt</module>
         <module>rookie-spring-security</module>
     </modules>
    <!-- https://blog.csdn.net/lazy_LYF/article/details/127284459-->
