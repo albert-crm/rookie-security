@@ -12,6 +12,9 @@
     <artifactId>rookie-spring-jwt</artifactId>
     <packaging>pom</packaging>
     <modules>
+        <module>rookie-encryption-decryption</module>
+        <module>rookie-jsonwebtoken-jwt</module>
+        <module>rookie-auth-jwt</module>
       <module>rookie-rookie-jwt</module>
 
     </modules>
