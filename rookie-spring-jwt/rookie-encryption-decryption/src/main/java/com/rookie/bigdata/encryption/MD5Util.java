@@ -20,6 +20,7 @@ public class MD5Util {
         String pwd = "a";
 
         byte[] md5Bytes = md.digest(pwd.getBytes("UTF-8"));
+        //将字节数组转换为十六进制字符数组
         System.out.println(new String(HexUtil.encodeHex(md5Bytes)));
         System.out.println(Base64Util.encode(md5Bytes));
 
@@ -37,6 +38,7 @@ public class MD5Util {
             byte b[] = md.digest();
             int i;
             StringBuffer buf = new StringBuffer("");
+            //将字节数组转换为十六进制字符数组
             for (int offset = 0; offset < b.length; offset++) {
                 i = b[offset];
                 if (i < 0)
