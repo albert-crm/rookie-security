@@ -9,14 +9,21 @@ import java.security.SecureRandom;
 
 /**
  * @Class DESUtil
- * @Description
+ * @Description https://www.cnblogs.com/at0x7c00/p/7688082.html
+ * https://www.cnblogs.com/at0x7c00/p/7519600.html
  * @Author rookie
  * @Date 2023/12/25 14:24
  * @Version 1.0
  */
 public class DESUtil {
 
-    //    1)DES(Data Encryption Standard,数据加密标准)加密之后，密文的长度的8的整数倍，秘钥长度是8字节(password)，即64bit位
+//    1)DES(Data Encryption Standard,数据加密标准)加密之后，密文的长度的8的整数倍，秘钥长度是8字节(password)，即64bit位
+//
+//    2)AES(Advanced Encryption Standard,高级加密标准)加密和解密，秘钥长度是16字节，即128bit位
+//
+//    3)对称加密密钥长度分析：
+//
+//            4）对称加密的特点：加密计算量小、速度块，适合对大量数据进行加密的场景。（记住这个特点，实际使用是会用到的）
 
 
     static final String ALGORITHM = "DES";

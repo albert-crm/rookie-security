@@ -7,7 +7,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 /**
  * @Class HMACUtil
- * @Description TODO
+ * @Description https://www.cnblogs.com/at0x7c00/p/7519600.html
  * @Author rookie
  * @Date 2023/12/25 14:22
  * @Version 1.0
@@ -24,18 +24,20 @@ public class HMACUtil {
         String mac = encryptHmac(key.getBytes(), data.getBytes());
         System.out.println(mac);
 
-        System.out.println(encryptHmac(key.getBytes(), "Hello2".getBytes()));
+        String key1 = getKey();
+        System.out.println("key:" + key1);
+        System.out.println(encryptHmac(key1.getBytes(), data.getBytes()));
 
     }
 
-    public static String getKey()throws Exception{
+    public static String getKey() throws Exception {
         KeyGenerator generator = KeyGenerator.getInstance("HmacMD5");
         SecretKey key = generator.generateKey();
         byte[] bytes = key.getEncoded();
         return Base64Util.encode(bytes);
     }
 
-    public static String encryptHmac(byte[] key,byte[] data)throws Exception{
+    public static String encryptHmac(byte[] key, byte[] data) throws Exception {
         SecretKey secretKey = new SecretKeySpec(key, "HmacMD5");
         Mac mac = Mac.getInstance("HmacMD5");
         mac.init(secretKey);

@@ -10,6 +10,7 @@ import java.util.Random;
 /**
  * @Class PBEUtil
  * @Description https://www.cnblogs.com/at0x7c00/p/7688082.html
+ * https://blog.csdn.net/u011897062/article/details/109117216
  * @Author rookie
  * @Date 2023/12/25 14:27
  * @Version 1.0

@@ -1,5 +1,6 @@
-package com.rookie.bigdata.encryption;
+package com.rookie.bigdata.rsa;
 
+import com.rookie.bigdata.encryption.Base64Util;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 import javax.crypto.Cipher;
@@ -9,15 +10,14 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
-
 /**
- * @Class RASUtil
+ * @Class RSAUtilMain
  * @Description https://www.cnblogs.com/at0x7c00/p/7688124.html
  * @Author rookie
- * @Date 2023/12/25 14:35
+ * @Date 2023/12/26 11:12
  * @Version 1.0
  */
-public class RSAUtil {
+public class RSAUtilMain {
 
     public final static String ALGORITHM = "RSA";
     public final static String SIGNATURE_ALGORITHM = "MD5withRSA";

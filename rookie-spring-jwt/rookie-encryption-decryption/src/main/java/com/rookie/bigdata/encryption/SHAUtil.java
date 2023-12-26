@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 
 /**
  * @Class SHAUtil
- * @Description TODO
+ * @Description https://www.cnblogs.com/at0x7c00/p/7519600.html
  * @Author rookie
  * @Date 2023/12/25 14:21
  * @Version 1.0

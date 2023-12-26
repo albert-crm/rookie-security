@@ -22,7 +22,7 @@ public class CaesarUtil {
         String abc1 = lowerCaseCaesarEncrypt("zabc", 25);
         System.out.println(abc1);
 
-        String abc2 = lowerCaseCaesarDecrypt("zabc", 25);
+        String abc2 = lowerCaseCaesarDecrypt(abc1, 25);
         System.out.println(abc2);
 
     }
