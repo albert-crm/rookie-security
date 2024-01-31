@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+zero:
+  auth:
+    security:
+      jwt:
+        ttl: 3600000
+        issuer: ${zero.domain-name}
+        key: accessToken
+        rsa:
+          secret: HdGkiOiI4ODgiLCJzdWIiOiLlsIdkdusdmnwlsYdfDSkpqlzelqJhdSKDxljHlNKKjds
+          private-file: G:\\tmp\\rsa\\rsa.pri
+          public-file: G:\\tmp\\rsa\\rsa.pub
