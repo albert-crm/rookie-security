@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @Class InterceptorConfig
- * @Description TODO
+ * @Description
  * @Author rookie
  * @Date 2023/12/25 15:50
  * @Version 1.0

@@ -23,7 +23,7 @@ public class RSAUtil {
     public final static String SIGNATURE_ALGORITHM = "MD5withRSA";
 
     /**
-     * 获取公钥密钥对
+     * 获取密钥对
      *
      * @return
      * @throws Exception
@@ -33,13 +33,6 @@ public class RSAUtil {
         return generator.generateKeyPair();
     }
 
-    /**
-     * 使用私钥获取公钥
-     *
-     * @param key
-     * @return
-     * @throws Exception
-     */
     private static Key getPublicKey(String key) throws Exception {
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(Base64Util.decode(key));
         KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
@@ -47,13 +40,6 @@ public class RSAUtil {
         return k;
     }
 
-    /**
-     * 使用公钥获取私钥
-     *
-     * @param key
-     * @return
-     * @throws Exception
-     */
     private static Key getPrivateKey(String key) throws Exception {
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Base64Util.decode(key));
         KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);

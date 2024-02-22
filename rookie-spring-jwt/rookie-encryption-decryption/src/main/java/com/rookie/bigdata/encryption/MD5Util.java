@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * @Class MD5Util
- * @Description TODO
+ * @Description
  * @Author rookie
  * @Date 2023/12/25 14:15
  * @Version 1.0
