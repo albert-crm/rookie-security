@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 /**
  * @Classname DynamicAccessDecisionManager
- * @Description TODO
+ * @Description
  * @Author rookie
  * @Date 2023/3/14 15:54
  * @Version 1.0
@@ -47,14 +47,14 @@ public class DynamicAccessDecisionManager implements AccessDecisionManager {
         final Collection<? extends GrantedAuthority> incomingRequestAuthorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : incomingRequestAuthorities) {
             // 如果当前 Authentication 有 requestUrl 的权限, 则认证通过
-            // TODO 用 AntPathMatcher 匹配C
+            //  用 AntPathMatcher 匹配C
             if (requiredRolesByTargetResources.contains(grantedAuthority.getAuthority())) {
                 logger.debug("{}#decide :: authenticate success.", CLASS_NAME);
                 return;
             }
         }
 
-        // TODO 需要查阅源码
+        //  需要查阅源码
         // 如果不执行 SecurityContextHolder.clearContext() 即使抛出 AccessDeniedException,
         // 最终 httpSecurity.exceptionHandling 也会捕获到 InsufficientAuthenticationException
         SecurityContextHolder.clearContext();

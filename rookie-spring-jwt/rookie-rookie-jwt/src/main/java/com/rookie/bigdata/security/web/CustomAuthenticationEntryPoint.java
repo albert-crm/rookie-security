@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * @Classname CustomAuthenticationEntryPoint
- * @Description TODO
+ * @Description
  * @Author rookie
  * @Date 2023/3/14 16:12
  * @Version 1.0

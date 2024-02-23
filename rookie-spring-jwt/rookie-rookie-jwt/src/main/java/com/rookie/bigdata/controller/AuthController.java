@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * @Classname AuthController
- * @Description TODO
+ * @Description
  * @Author rookie
  * @Date 2023/3/14 16:13
  * @Version 1.0

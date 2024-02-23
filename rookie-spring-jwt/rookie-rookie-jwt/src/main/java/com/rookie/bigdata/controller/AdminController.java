@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Classname AdminController
- * @Description TODO
+ * @Description
  * @Author rookie
  * @Date 2023/3/14 16:13
  * @Version 1.0

@@ -2,7 +2,7 @@ package com.rookie.bigdata.pkcs;
 
 /**
  * @Class RSATest2
- * @Description TODO
+ * @Description
  * @Author rookie
  * @Date 2023/12/26 10:37
  * @Version 1.0
@@ -19,8 +19,8 @@ import java.security.spec.X509EncodedKeySpec;
  * SHA1WithRSA-数字签名
  * Created by yanshao on 2018/12/12.
  */
-// TODO: 2018/12/12 数字签名就发现这个能用
-// TODO: 2018/12/12 原文地址：https://blog.csdn.net/qq_23974323/article/details/77678491
+// : 2018/12/12 数字签名就发现这个能用
+// : 2018/12/12 原文地址：https://blog.csdn.net/qq_23974323/article/details/77678491
 public class RSATest2 {
 
     //加密算法

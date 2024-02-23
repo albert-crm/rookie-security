@@ -30,7 +30,7 @@ import org.springframework.util.AntPathMatcher;
 
 /**
  * @Classname SecurityConfig
- * @Description TODO
+ * @Description
  * @Author rookie
  * @Date 2023/3/14 12:08
  * @Version 1.0
